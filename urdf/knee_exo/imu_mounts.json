@@ -1,0 +1,9 @@
+{
+  "description": "Provisional IMU locations at brace COM, axes parallel to each URDF link. Replace with measured sensor mounting transforms. Positions in meters, fixed-axis RPY in degrees, relative to the named device body.",
+  "sensors": [
+    {"name": "left_thigh", "body": "knee_L_upper", "pos_m": [-0.0073767, -0.18865, 0.0094714], "rpy_deg": [0, 0, 0]},
+    {"name": "right_thigh", "body": "knee_R_upper", "pos_m": [0.0073767, -0.18865, 0.0094714], "rpy_deg": [0, 0, 0]},
+    {"name": "left_shank", "body": "knee_L_lower", "pos_m": [0.0043207, 0.15773, 0.0087075], "rpy_deg": [0, 0, 0]},
+    {"name": "right_shank", "body": "knee_R_lower", "pos_m": [-0.0043207, 0.15773, 0.0087075], "rpy_deg": [0, 0, 0]}
+  ]
+}

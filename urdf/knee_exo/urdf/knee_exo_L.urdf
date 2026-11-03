@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="knee_exo">
+  <!-- Generated from knee_exo_R.urdf by tools/mirror_knee_urdf.py: CAD local X reflection. Meshes, COM, inertia, transforms and joint axes mirrored; masses/limits preserved. -->
+  <link name="base_link">
+    <inertial>
+      <origin xyz="-0.0073767 -0.18865 0.0094714" rpy="0 0 0" />
+      <mass value="0.35343" />
+      <inertia ixx="0.00045581" ixy="-6.1002e-06" ixz="1.0677e-05" iyy="0.00044459" iyz="5.5582e-06" izz="0.00064814" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://knee_exo/meshes/base_link_L.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://knee_exo/meshes/base_link_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="shank_link">
+    <inertial>
+      <origin xyz="0.0043207 0.15773 0.0087075" rpy="0 0 0" />
+      <mass value="0.19648" />
+      <inertia ixx="0.00032827" ixy="1.7573e-06" ixz="-4.4171e-05" iyy="0.00013433" iyz="-2.2475e-05" izz="0.00038484" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://knee_exo/meshes/shank_link_L.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.79608 0.82353 0.93725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://knee_exo/meshes/shank_link_L.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="knee_joint" type="revolute">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="shank_link" />
+    <axis xyz="0 0 -1" />
+    <limit lower="0" upper="1.9199" effort="20" velocity="20" />
+  </joint>
+</robot>

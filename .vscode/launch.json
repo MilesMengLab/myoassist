@@ -1,0 +1,714 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 膝关节 | KneeExo IMU26 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/local_knee_exo/imitation_22_knee_exo_imu26.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--config.ppo_params.device",
+                "cpu",
+                "--no-flag_rendering",
+                "--config.total_timesteps",
+                "30000000"
+            ],
+            "preLaunchTask": "Build local knee training model"
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 膝关节 | KneeExo IMU26 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "60",
+                "--no-config.env_params.flag_random_ref_index"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 踝关节 | DephyExoBoot_L1 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/device_sweep/imitation_22_DephyExoBoot_L1_h128_e32_sidenet_mirror0p1_actpen10.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--no-flag_rendering"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 踝关节 | DephyExoBoot_L1 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "60"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 髋关节 | HMEDI_L1 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/device_sweep/imitation_22_HMEDI_L1_h128_e32_sidenet_mirror0p1_actpen10.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--no-flag_rendering"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 髋关节 | HMEDI_L1 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "120"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 髋关节 | Hippo_L1 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/device_sweep/imitation_22_Hippo_L1_h128_e32_sidenet_mirror0p1_actpen10.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--no-flag_rendering"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 髋关节 | Hippo_L1 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "60"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 踝关节 | Humotech_L1 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/device_sweep/imitation_22_Humotech_L1_h128_e32_sidenet_mirror0p1_actpen10.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--no-flag_rendering"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 踝关节 | Humotech_L1 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "60"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 踝关节 | OpenExo_L1 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/device_sweep/imitation_22_OpenExo_L1_h128_e32_sidenet_mirror0p1_actpen10.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--no-flag_rendering"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 踝关节 | OpenExo_L1 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "60"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 踝关节 | STRIDE_L2 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/device_sweep/imitation_22_STRIDE_L2_h128_e32_sidenet_mirror0p1_actpen10.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--no-flag_rendering"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 踝关节 | STRIDE_L2 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "60"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 踝关节 | Tutorial_L1 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/device_sweep/imitation_22_Tutorial_L1_h128_e32_sidenet_mirror0p1_actpen10.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--no-flag_rendering"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 踝关节 | Tutorial_L1 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "60"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 踝关节 | UTAnkleExo_L2 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/device_sweep/imitation_22_UTAnkleExo_L2_h128_e32_sidenet_mirror0p1_actpen10.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--no-flag_rendering"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 踝关节 | UTAnkleExo_L2 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "60"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 教程 | 关闭外骨骼助力 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/imitation_tutorial_22_separated_net_exo_off.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--no-flag_rendering"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 教程 | 关闭外骨骼助力 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "60"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 教程 | 完整观测 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/imitation_tutorial_22_separated_net_full_obs.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--no-flag_rendering"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 教程 | 完整观测 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "60"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 教程 | 部分观测 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/imitation_tutorial_22_separated_net_partial_obs.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--no-flag_rendering"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 教程 | 部分观测 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "60"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 教程 | 速度控制 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/imitation_tutorial_22_separated_net_speed_control.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--no-flag_rendering"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 教程 | 速度控制 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "60"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Train | 测试 | 最小训练 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--config_file_path",
+                "rl_train/train/train_configs/test.json",
+                "--config.env_params.num_envs",
+                "32",
+                "--no-flag_rendering"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Play | 测试 | 最小训练 | CPU",
+            "module": "rl_train.run_train",
+            "args": [
+                "--play_model_path",
+                "${input:playModelPath}",
+                "--config.ppo_params.device",
+                "cpu",
+                "--flag_realtime_evaluate",
+                "--play_seconds",
+                "60"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "module": "tools.import_knee_urdf",
+            "name": "URDF | Convert knee exoskeleton L + R",
+            "args": []
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "module": "tools.import_knee_urdf",
+            "name": "URDF | Preview knee exoskeleton L",
+            "args": [
+                "--view",
+                "L"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "module": "tools.import_knee_urdf",
+            "name": "URDF | Preview knee exoskeleton R",
+            "args": [
+                "--view",
+                "R"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "module": "tools.preview_knee_mount",
+            "name": "Mount | Human + knee exoskeleton | calibrate",
+            "args": []
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "module": "tools.preview_knee_mount",
+            "name": "Mount | Human + knee exoskeleton | flexion preview",
+            "args": [
+                "--animate"
+            ]
+        },
+        {
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            },
+            "name": "Knee | Build ideal training model",
+            "module": "tools.build_knee_training_model",
+            "args": []
+        },
+        {
+            "name": "Preview | 官方髋关节 Hippo_L1 | 参考步态",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.mrl_venv/bin/python",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "module": "tools.preview_hip_reference",
+            "args": [
+                "--view"
+            ],
+            "env": {
+                "PYTHONUNBUFFERED": "1"
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "playModelPath",
+            "type": "promptString",
+            "description": "输入模型完整路径（含 .zip），自动读取对应训练配置；支持工作区相对路径或绝对路径",
+            "default": "rl_train/results/train_session_20261103-181243/trained_models/model_29900800.zip"
+        }
+    ]
+}

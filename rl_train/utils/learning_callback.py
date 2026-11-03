@@ -4,7 +4,7 @@ from datetime import datetime
 from rl_train.utils import train_log_handler
 from rl_train.analyzer.train_analyzer import TrainAnalyzer
 from rl_train.utils.train_checkpoint_data import TrainCheckpointData
-from multiprocessing import Pool
+from multiprocessing import get_context
 
 
 def _analyze_process(log_dir):
@@ -151,7 +151,8 @@ class BaseCustomLearningCallback(BaseCallback):
             # For debug:
             # _analyze_process(self.train_log_handler.log_dir)
 
-            pool = Pool(processes=1)
+            # Evaluation may use CUDA; fork inherits an unusable CUDA runtime.
+            pool = get_context("spawn").Pool(processes=1)
             try:
                 pool.apply(_analyze_process, args=(self.train_log_handler.log_dir,))
             finally:
