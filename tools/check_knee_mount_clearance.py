@@ -10,7 +10,7 @@ import json
 import numpy as np
 from scipy.spatial import cKDTree
 
-from tools.preview_knee_mount import DEFAULT_CONFIG, DEFAULT_OUTPUT, build, load_config, update
+from tools.preview_knee_hinge_mount import DEFAULT_CONFIG, DEFAULT_OUTPUT
 
 
 def mesh_geometry(model, data, geom):
@@ -139,30 +139,9 @@ def surface_distance(first, second):
 
 
 def audit(config_path=DEFAULT_CONFIG, angles=(0, 30, 60, 90)):
-    model, data, devices = build()
-    config = load_config(config_path)
-    rows = []
-    # Every human mesh is checked, including the opposite leg and pelvis.
-    device_geoms = [model.geom(f"knee_{s}_{p}_visual").id for s in ("R", "L") for p in ("upper", "lower")]
-    human_geoms = [g for g in range(model.ngeom) if model.geom_type[g] == 7 and g not in device_geoms]
-    for angle in angles:
-        alignment = update(model, data, devices, config, angle)
-        meshes = {g: mesh_geometry(model, data, g) for g in human_geoms + device_geoms}
-        crossings = []
-        for device in device_geoms:
-            for human in human_geoms:
-                count = surface_crossings(meshes[device], meshes[human])
-                if count:
-                    crossings.append({"device": model.geom(device).name,
-                                      "human": model.geom(human).name, "crossing_edges": int(count)})
-        row = {"flexion_deg": angle, "surface_intersections": crossings, "axis_alignment": alignment}
-        rows.append(row)
-        print(json.dumps(row), flush=True)
-    result = {"mounting": config, "poses": rows,
-              "scope": "actual mesh surfaces only; no skin or line-muscle clearance certification"}
-    path = DEFAULT_OUTPUT / "clearance_report.json"
-    path.write_text(json.dumps(result, indent=2) + "\n")
-    return result
+    from tools.check_knee_hinge_clearance import audit as hinge_audit
+
+    return hinge_audit(config_path, DEFAULT_OUTPUT, angles)
 
 
 def main():

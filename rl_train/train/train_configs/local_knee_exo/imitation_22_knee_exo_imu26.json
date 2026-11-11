@@ -64,7 +64,9 @@
             "imu_left_shank_acc",
             "imu_left_shank_gyro",
             "imu_right_shank_acc",
-            "imu_right_shank_gyro"
+            "imu_right_shank_gyro",
+            "right_knee_encoder_pos",
+            "right_knee_encoder_vel"
         ],
         "msk_key": null,
         "device_key": null,
@@ -115,7 +117,7 @@
             "pelvis_ty"
         ],
         "prev_trained_policy_path": null,
-        "model_path": "urdf/knee_exo/mujoco/training/human_knee_exo.xml"
+        "model_path": "urdf/knee_exo_hinge/mujoco/training/human_knee_exo.xml"
     },
     "ppo_params": {
         "learning_rate": 0.0001,
@@ -197,8 +199,8 @@
                         {
                             "type": "range",
                             "range": [
-                                67,
-                                68
+                                69,
+                                70
                             ],
                             "comment": "target velocity"
                         }
@@ -275,8 +277,8 @@
                         {
                             "type": "range",
                             "range": [
-                                67,
-                                68
+                                69,
+                                70
                             ],
                             "comment": "target velocity"
                         }
@@ -311,10 +313,10 @@
                                 64,
                                 65,
                                 66,
-                                5,
-                                13
+                                67,
+                                68
                             ],
-                            "comment": "4 IMUs in left_thigh,right_thigh,left_shank,right_shank order; ax,ay,az,gx,gy,gz each; then right knee q,dq. Raw SI units."
+                            "comment": "4 IMUs in fixed order followed by actual right device knee encoder q,dq; positive encoder angle is flexion; raw SI units."
                         }
                     ],
                     "action": [

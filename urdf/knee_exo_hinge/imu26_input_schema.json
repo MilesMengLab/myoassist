@@ -1,0 +1,150 @@
+{
+  "input_dimension": 26,
+  "full_observation_dimension": 70,
+  "control_hz": 30,
+  "inputs": [
+    {
+      "index": 0,
+      "name": "left_thigh.acc_x",
+      "unit": "m/s^2"
+    },
+    {
+      "index": 1,
+      "name": "left_thigh.acc_y",
+      "unit": "m/s^2"
+    },
+    {
+      "index": 2,
+      "name": "left_thigh.acc_z",
+      "unit": "m/s^2"
+    },
+    {
+      "index": 3,
+      "name": "left_thigh.gyro_x",
+      "unit": "rad/s"
+    },
+    {
+      "index": 4,
+      "name": "left_thigh.gyro_y",
+      "unit": "rad/s"
+    },
+    {
+      "index": 5,
+      "name": "left_thigh.gyro_z",
+      "unit": "rad/s"
+    },
+    {
+      "index": 6,
+      "name": "right_thigh.acc_x",
+      "unit": "m/s^2"
+    },
+    {
+      "index": 7,
+      "name": "right_thigh.acc_y",
+      "unit": "m/s^2"
+    },
+    {
+      "index": 8,
+      "name": "right_thigh.acc_z",
+      "unit": "m/s^2"
+    },
+    {
+      "index": 9,
+      "name": "right_thigh.gyro_x",
+      "unit": "rad/s"
+    },
+    {
+      "index": 10,
+      "name": "right_thigh.gyro_y",
+      "unit": "rad/s"
+    },
+    {
+      "index": 11,
+      "name": "right_thigh.gyro_z",
+      "unit": "rad/s"
+    },
+    {
+      "index": 12,
+      "name": "left_shank.acc_x",
+      "unit": "m/s^2"
+    },
+    {
+      "index": 13,
+      "name": "left_shank.acc_y",
+      "unit": "m/s^2"
+    },
+    {
+      "index": 14,
+      "name": "left_shank.acc_z",
+      "unit": "m/s^2"
+    },
+    {
+      "index": 15,
+      "name": "left_shank.gyro_x",
+      "unit": "rad/s"
+    },
+    {
+      "index": 16,
+      "name": "left_shank.gyro_y",
+      "unit": "rad/s"
+    },
+    {
+      "index": 17,
+      "name": "left_shank.gyro_z",
+      "unit": "rad/s"
+    },
+    {
+      "index": 18,
+      "name": "right_shank.acc_x",
+      "unit": "m/s^2"
+    },
+    {
+      "index": 19,
+      "name": "right_shank.acc_y",
+      "unit": "m/s^2"
+    },
+    {
+      "index": 20,
+      "name": "right_shank.acc_z",
+      "unit": "m/s^2"
+    },
+    {
+      "index": 21,
+      "name": "right_shank.gyro_x",
+      "unit": "rad/s"
+    },
+    {
+      "index": 22,
+      "name": "right_shank.gyro_y",
+      "unit": "rad/s"
+    },
+    {
+      "index": 23,
+      "name": "right_shank.gyro_z",
+      "unit": "rad/s"
+    },
+    {
+      "index": 24,
+      "name": "right_knee.angle",
+      "unit": "rad"
+    },
+    {
+      "index": 25,
+      "name": "right_knee.angular_velocity",
+      "unit": "rad/s"
+    }
+  ],
+  "encoder_joint": "exo_knee_r",
+  "encoder_positive": "device knee flexion",
+  "command_order": [
+    "Exo_R",
+    "Exo_L"
+  ],
+  "command_range": [
+    -1,
+    1
+  ],
+  "torque_limit_nm": 20,
+  "acceleration": "site-frame specific force, including gravity response; no normalization",
+  "provisional_imu_sites": "imu_mounts.json; replace with measured hardware locations and axis calibration"
+}

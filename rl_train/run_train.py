@@ -146,7 +146,7 @@ def ppo_train_with_parameters(config, train_time_step, is_rendering_on, train_lo
     session_config_dict["env_params"].pop("reference_data", None)
 
     session_config_dict["code_version"] = VERSION
-    with open(os.path.join(log_dir, "session_config.json"), "w", encoding="utf-8") as file:
+    with open(os.path.join(train_log_handler.log_dir, "session_config.json"), "w", encoding="utf-8") as file:
         json.dump(session_config_dict, file, ensure_ascii=False, indent=4)
 
     custom_callback = EnvironmentHandler.get_callback(config, train_log_handler)

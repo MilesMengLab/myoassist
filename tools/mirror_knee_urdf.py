@@ -106,7 +106,7 @@ def mirror(source, target):
             meshes[original] = mirrored
         mesh.set("filename", prefix + mirrored.relative_to(package).as_posix())
     root.insert(0, ET.Comment(
-        " Generated from knee_exo_R.urdf by tools/mirror_knee_urdf.py: CAD local X reflection. "
+        f" Generated from {source.name} by tools/mirror_knee_urdf.py: CAD local X reflection. "
         "Meshes, COM, inertia, transforms and joint axes mirrored; masses/limits preserved. "
     ))
     ET.indent(root)
@@ -117,8 +117,8 @@ def mirror(source, target):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source", type=Path, default=ROOT / "urdf/knee_exo/urdf/knee_exo_R.urdf")
-    parser.add_argument("--target", type=Path, default=ROOT / "urdf/knee_exo/urdf/knee_exo_L.urdf")
+    parser.add_argument("--source", type=Path, default=ROOT / "urdf/knee_exo_hinge/urdf/knee_exo_hinge_r.urdf")
+    parser.add_argument("--target", type=Path, default=ROOT / "urdf/knee_exo_hinge/urdf/knee_exo_hinge_l.urdf")
     args = parser.parse_args()
     mirror(args.source, args.target)
 

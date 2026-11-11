@@ -50,16 +50,27 @@ def convert(source: Path, output: Path) -> dict:
     target = output / f"{source.stem}.xml"
     mujoco.mj_saveLastXML(str(target), model)
     # URDF effort limits are metadata, not automatically created MuJoCo motors.
-    joint = robot.find("joint")
-    limits = joint.find("limit")
+    joints = []
+    for joint in robot.findall("joint"):
+        if joint.get("type") == "fixed":
+            continue
+        axis = joint.find("axis")
+        limits = joint.find("limit")
+        joints.append({
+            "name": joint.get("name"), "type": joint.get("type"),
+            "axis": axis.get("xyz") if axis is not None else "1 0 0",
+            "effort_limit": float(limits.get("effort")) if limits is not None else None,
+        })
     report = {
         "source": str(source), "mjcf": str(target.resolve()),
         "bodies_excluding_world": model.nbody - 1,
         "joint_count": model.njnt, "actuator_count": model.nu,
         "total_mass_kg": float(model.body_mass.sum()),
-        "joint_name": joint.get("name"), "axis": joint.find("axis").get("xyz"),
+        "joint_name": joints[0]["name"] if joints else None,
+        "axis": joints[0]["axis"] if joints else None,
         "joint_range_rad": model.jnt_range.tolist(),
-        "urdf_effort_limit": float(limits.get("effort")),
+        "urdf_effort_limit": joints[0]["effort_limit"] if joints else None,
+        "joints": joints,
         "status": "standalone device; human attachment and motor configuration required",
     }
     (output / f"{source.stem}_report.json").write_text(json.dumps(report, indent=2) + "\n")
@@ -85,15 +96,21 @@ def preview(path: Path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--package", type=Path, default=ROOT / "urdf/knee_exo")
-    parser.add_argument("--output", type=Path, default=ROOT / "urdf/knee_exo/mujoco")
+    parser.add_argument("--package", type=Path, default=ROOT / "urdf/knee_exo_hinge")
+    parser.add_argument("--output", type=Path, default=None)
     parser.add_argument("--view", choices=["L", "R"], help="Open one converted device in MuJoCo")
     args = parser.parse_args()
+    output = args.output or args.package / "mujoco"
+    reports = {}
     for side in ("L", "R"):
-        report = convert(args.package / "urdf" / f"knee_exo_{side}.urdf", args.output)
+        candidates = [args.package / "urdf" / f"{args.package.name}_{suffix}.urdf"
+                      for suffix in (side.lower(), side)]
+        source = next((p for p in candidates if p.is_file()), candidates[0])
+        report = convert(source, output)
+        reports[side] = report
         print(json.dumps(report, indent=2))
     if args.view:
-        preview(args.output / f"knee_exo_{args.view}.xml")
+        preview(Path(reports[args.view]["mjcf"]))
 
 
 if __name__ == "__main__":

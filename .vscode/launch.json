@@ -11,7 +11,7 @@
             "env": {
                 "PYTHONUNBUFFERED": "1"
             },
-            "name": "Train | 膝关节 | KneeExo IMU26 | CPU",
+            "name": "Train | 膝关节 | KneeExo Hinge IMU26 | CPU",
             "module": "rl_train.run_train",
             "args": [
                 "--config_file_path",
@@ -24,7 +24,7 @@
                 "--config.total_timesteps",
                 "30000000"
             ],
-            "preLaunchTask": "Build local knee training model"
+            "preLaunchTask": "Build aligned knee hinge training model"
         },
         {
             "type": "debugpy",
@@ -36,7 +36,7 @@
             "env": {
                 "PYTHONUNBUFFERED": "1"
             },
-            "name": "Play | 膝关节 | KneeExo IMU26 | CPU",
+            "name": "Play | 膝关节 | KneeExo Hinge IMU26 | CPU",
             "module": "rl_train.run_train",
             "args": [
                 "--play_model_path",
@@ -45,7 +45,7 @@
                 "cpu",
                 "--flag_realtime_evaluate",
                 "--play_seconds",
-                "60",
+                "120",
                 "--no-config.env_params.flag_random_ref_index"
             ]
         },
@@ -606,7 +606,7 @@
                 "PYTHONUNBUFFERED": "1"
             },
             "module": "tools.import_knee_urdf",
-            "name": "URDF | Convert knee exoskeleton L + R",
+            "name": "URDF | Convert knee hinge exoskeleton L + R",
             "args": []
         },
         {
@@ -620,7 +620,7 @@
                 "PYTHONUNBUFFERED": "1"
             },
             "module": "tools.import_knee_urdf",
-            "name": "URDF | Preview knee exoskeleton L",
+            "name": "URDF | Preview knee hinge exoskeleton L",
             "args": [
                 "--view",
                 "L"
@@ -637,7 +637,7 @@
                 "PYTHONUNBUFFERED": "1"
             },
             "module": "tools.import_knee_urdf",
-            "name": "URDF | Preview knee exoskeleton R",
+            "name": "URDF | Preview knee hinge exoskeleton R",
             "args": [
                 "--view",
                 "R"
@@ -653,8 +653,8 @@
             "env": {
                 "PYTHONUNBUFFERED": "1"
             },
-            "module": "tools.preview_knee_mount",
-            "name": "Mount | Human + knee exoskeleton | calibrate",
+            "module": "tools.preview_knee_hinge_mount",
+            "name": "Mount | Human + aligned knee hinge exoskeleton | calibrate",
             "args": []
         },
         {
@@ -667,8 +667,8 @@
             "env": {
                 "PYTHONUNBUFFERED": "1"
             },
-            "module": "tools.preview_knee_mount",
-            "name": "Mount | Human + knee exoskeleton | flexion preview",
+            "module": "tools.preview_knee_hinge_mount",
+            "name": "Mount | Human + aligned knee hinge exoskeleton | flexion preview",
             "args": [
                 "--animate"
             ]
@@ -707,8 +707,7 @@
         {
             "id": "playModelPath",
             "type": "promptString",
-            "description": "输入模型完整路径（含 .zip），自动读取对应训练配置；支持工作区相对路径或绝对路径",
-            "default": "rl_train/results/train_session_20261103-181243/trained_models/model_29900800.zip"
+            "description": "输入模型完整路径（含 .zip），自动读取对应训练配置；支持工作区相对路径或绝对路径"
         }
     ]
 }

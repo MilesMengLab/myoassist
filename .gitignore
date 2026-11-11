@@ -126,6 +126,7 @@ osl.log
 
 *processed.xml
 
+rl_train/data
 
 # MyoAssist #
 rl_train/train_logs/

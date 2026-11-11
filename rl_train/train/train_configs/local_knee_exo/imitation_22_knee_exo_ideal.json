@@ -107,7 +107,7 @@
             "pelvis_ty"
         ],
         "prev_trained_policy_path": null,
-        "model_path": "urdf/knee_exo/mujoco/training/human_knee_exo.xml"
+        "model_path": "urdf/knee_exo_hinge/mujoco/training/human_knee_exo.xml"
     },
     "ppo_params": {
         "learning_rate": 0.0001,

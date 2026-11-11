@@ -15,6 +15,15 @@ _EXO_ENV_IDS = ("myoAssistLegImitationExo-v0",)
 
 class EnvironmentHandler:
     @staticmethod
+    def _load_model(model_xml):
+        import mujoco
+
+        source = str(model_xml)
+        if source.lstrip().startswith("<"):
+            return mujoco.MjModel.from_xml_string(source)
+        return mujoco.MjModel.from_xml_path(source)
+
+    @staticmethod
     def _validate_action_layout(model_xml: str, config) -> None:
         """Fail fast when a config's action layout disagrees with the composed model.
 
@@ -38,7 +47,7 @@ class EnvironmentHandler:
         """
         import mujoco
 
-        model = mujoco.MjModel.from_xml_string(model_xml)
+        model = EnvironmentHandler._load_model(model_xml)
         # Count muscles by actuator dynamics rather than as nu - na: a device's `general`
         # actuator may declare its own activation dynamics, which would inflate na.
         n_muscle = int((model.actuator_dyntype == mujoco.mjtDyn.mjDYN_MUSCLE).sum())
@@ -131,6 +140,8 @@ class EnvironmentHandler:
                 "model_path to load a pre-built MJCF. The shipped configs use the "
                 "compose keys; a config carrying neither is a migration oversight."
             )
+        else:
+            EnvironmentHandler._validate_action_layout(model_path, config)
 
         # Base gym.make arguments
         gym_make_args = {
@@ -271,6 +282,7 @@ class EnvironmentHandler:
             model = stable_baselines3.PPO.load(
                 trained_model_path,
                 env=env,
+                device=config.ppo_params.device,
                 custom_objects={"policy_class": policy_class},
             )
         elif config.env_params.prev_trained_policy_path:
@@ -332,13 +344,16 @@ class EnvironmentHandler:
         from myoassist_utils.compose import compose_env_model
         from rl_train.train.policies.mirror import action_permutation, observation_permutation
 
-        model = mujoco.MjModel.from_xml_string(
+        source = (
             compose_env_model(
                 config.env_params.msk_key,
                 config.env_params.device_key,
                 terrain=config.env_params.terrain,
             )
+            if config.env_params.msk_key and config.env_params.device_key
+            else config.env_params.model_path
         )
+        model = EnvironmentHandler._load_model(source)
         n_muscle = int((model.actuator_dyntype == mujoco.mjtDyn.mjDYN_MUSCLE).sum())
         names = [model.actuator(i).name for i in range(model.nu)]
         act_perm = action_permutation(names)

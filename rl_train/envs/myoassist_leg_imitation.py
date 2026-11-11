@@ -264,6 +264,9 @@ class MyoAssistLegImitation(MyoAssistLegBase):
             self.sim.data.joint(f"{key}").qvel = (
                 self._reference_data["series_data"][f"dq_{key}"][self._imitation_index] * speed_ratio_to_target_velocity
             )
+        from myoassist_utils.knee_hinge import synchronize_reference_state
+
+        synchronize_reference_state(self.sim)
 
     def imitation_step(self, is_x_follow: bool, specific_index: int | None = None):
         if specific_index is None:
